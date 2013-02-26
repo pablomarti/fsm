@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  incident_kind: 
+  system_case: 
+
+two:
+  incident_kind: 
+  system_case: 

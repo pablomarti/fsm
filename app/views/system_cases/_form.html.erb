@@ -1,0 +1,12 @@
+<%= simple_form_for @system_case, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :city_id %>
+  <%= f.input :zone_kind_id %>
+  <%= f.input :aggression_date %>
+  <%= f.input :recidivism %>
+  <%= f.input :complaint %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                system_cases_path, :class => 'btn' %>
+  </div>
+<% end %>

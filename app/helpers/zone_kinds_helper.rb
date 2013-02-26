@@ -1,0 +1,2 @@
+module ZoneKindsHelper
+end

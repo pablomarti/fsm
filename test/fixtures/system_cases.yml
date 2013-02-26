@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  city: 
+  zone_kind: 
+  aggression_date: 2013-02-25 22:18:32
+  recidivism: false
+  complaint: false
+
+two:
+  city: 
+  zone_kind: 
+  aggression_date: 2013-02-25 22:18:32
+  recidivism: false
+  complaint: false

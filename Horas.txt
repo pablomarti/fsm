@@ -1,0 +1,8 @@
+Sabado: 1h
+Domingo: 1h
+Lunes: 3h
+Martes: 3h
+Miercoles: 13h +4h de Rene
+Jueves: 13h +4h de Rene
+
+Total: 34h + 8h de Rene = 42h

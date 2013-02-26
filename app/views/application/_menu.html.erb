@@ -1,0 +1,37 @@
+<% if can? :manage, :all %>
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Administracion de usuarios <b class="caret"></b></a>
+
+		<ul class="dropdown-menu">
+			<li><%= link_to "Niveles", levels_path %></li>
+			<li><%= link_to "Roles", roles_path %></li>
+			<li class="divider"></li>
+			<li><%= link_to "Usuarios", users_path %></li>
+		</ul>
+	</li>
+
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Configuracion <b class="caret"></b></a>
+
+		<ul class="dropdown-menu">
+			<li><%= link_to "Departamentos", states_path %></li>
+			<li><%= link_to "Tipos de documentos", document_types_path %></li>
+			<li><%= link_to "Niveles educativos", educational_levels_path %></li>
+			<li><%= link_to "Estados de embarazo", pregnancy_states_path %></li>
+			<li><%= link_to "Estados civiles", civil_states_path %></li>
+			<li><%= link_to "Ocupaciones", ocupations_path %></li>
+			<li><%= link_to "Tipos de zonas", zone_kinds_path %></li>
+			<li class="divider"></li>
+			<li><%= link_to "Tipos de agresiones", aggression_kinds_path %></li>
+			<li><%= link_to "Tipos de armas", weapon_kinds_path %></li>
+			<li><%= link_to "Condiciones emocionales", emotional_conditions_path %></li>
+			<li><%= link_to "Alteraciones psico-fisiologicas", psycho_physio_alterations_path %></li>
+			<li><%= link_to "Condiciones fisicas", physical_conditions_path %></li>
+			<li><%= link_to "Tipos de incidentes", incident_kinds_path %></li>
+		</ul>
+	</li>
+
+	<li>
+		<%= link_to "Casos", system_cases_path %>
+	</li>
+<% end %>

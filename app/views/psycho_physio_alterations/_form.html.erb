@@ -1,0 +1,8 @@
+<%= simple_form_for @psycho_physio_alteration, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                psycho_physio_alterations_path, :class => 'btn' %>
+  </div>
+<% end %>

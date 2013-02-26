@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  weapon_kind: 
+  aggressor: 
+
+two:
+  weapon_kind: 
+  aggressor: 
