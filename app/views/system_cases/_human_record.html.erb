@@ -8,4 +8,6 @@
 	<%= f.association :ocupation, :label => "Ocupacion", :include_blank => false %>
 	<%= f.association :city, :label => "Municipio de procedencia", :include_blank => false %>
 	<%= f.association :violence_kind, :label => "Rol en evento", :include_blank => false %>
+  	
+  	<%= link_to "Eliminar", '#', class: "remove_fields" %>
 </fieldset>

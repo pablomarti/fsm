@@ -13,6 +13,8 @@
       <%= render 'human_record', f: builder %>
   <% end %>
 
+  <%= link_to_add_fields "Agregar involucrado", f, :human_records %>
+
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
