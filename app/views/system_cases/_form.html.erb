@@ -7,11 +7,13 @@
 
   <hr /> 
 
-  <h3>Involucrados</h3>
+  <h3>Victimas</h3>
 
   <%= f.fields_for :human_records do |builder| %>
       <%= render 'human_record', f: builder %>
   <% end %>
+
+  <%= link_to_add_fields "Agregar victima", f, :human_records %>
 
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
