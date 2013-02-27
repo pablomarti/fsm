@@ -1,0 +1,8 @@
+<%= simple_form_for @violence_kind, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                violence_kinds_path, :class => 'btn' %>
+  </div>
+<% end %>

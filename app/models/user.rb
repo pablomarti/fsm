@@ -13,13 +13,25 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me 
   attr_accessible :active, :last_name, :name, :level_id
+
+  after_save :assign_user_roles
+
+  def assign_user_roles
+    user_roles.destroy_all
+    
+    level.roles.map{ |role|
+      UserRole.create!(:user_id => id, :role_id => role.id)
+    }
+  end
   
   def full_name
   	name + " " + last_name
   end
 
   def role?(role_sym)
-  	roles.has_role?(role_sym)
+  	r = roles.has_role?(role_sym)
+    puts "HAS SYM #{role_sym}? #{r}"
+    return r
   end
 
   def has_level?(level_name)

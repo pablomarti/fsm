@@ -8,12 +8,12 @@ class Role < ActiveRecord::Base
 
   before_save :fix_alias
 
-  def self.has_role?(role_sym)
-  	!Role.where(:alias => role_sym.to_s).empty?
+  def fix_alias
+    self.alias.downcase.gsub!(/\s+/, "_")
   end
 
-  def fix_alias
-  	self.alias.downcase.gsub!(/\s+/, "_")
+  def self.has_role?(role_sym)
+  	!Role.where(:alias => role_sym.to_s).empty?
   end
 
 end

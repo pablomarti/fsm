@@ -1,5 +1,11 @@
 Fosalud::Application.routes.draw do
 
+  resources :humen
+
+
+  resources :violence_kinds
+
+
   resources :system_cases
 
 

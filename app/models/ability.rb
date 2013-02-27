@@ -5,7 +5,16 @@ class Ability
     user ||= User.new #Guest user
 
     if user.has_level? "Administrador"
-      can :manage, :all  
+      can :manage, :all 
+    else
+      if user.role? :read_case
+        can :read, SystemCase
+      end 
+
+      if user.role? :create_case
+        can :read, SystemCase
+        can :create, SystemCase
+      end
     end
 
 =begin    

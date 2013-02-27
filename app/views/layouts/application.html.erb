@@ -29,7 +29,7 @@
           <ul class="nav pull-right">
             <% if user_signed_in? %>
               <li><%= link_to "Bienvenido, #{current_user.full_name}", edit_user_registration_path %></li>
-              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to "Salir", destroy_user_session_path, method: :delete %></li>
             <% else %>
               <li><%= link_to "Acceder", new_user_session_path %></li>
             <% end %>
@@ -52,14 +52,24 @@
       <div class="span9">
         <%= yield %>
       </div>
-      <div class="span3">
-      	<div class="row">
-      		X
-      	</div>    
 
-      	<div class="row">
-      		Y
-      	</div>     
+      <div class="span3">
+        <% if user_signed_in? %>
+          	<div class="row">
+          	   <h3>Cola de pacientes</h3>
+               <div>
+                  <%= render :partial => "list_item", :collection => @list %>
+               </div>
+          	</div>    
+
+            <div class="row">
+              <hr />
+            </div>
+
+          	<div class="row">
+          		<h3>Notificaciones</h3>
+          	</div>
+        <% end %>     
       </div>
     </div>
   </div>

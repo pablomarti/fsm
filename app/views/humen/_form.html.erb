@@ -1,0 +1,16 @@
+<%= simple_form_for(@human) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :last_name %>
+    <%= f.input :birthdate %>
+    <%= f.input :sex %>
+    <%= f.input :total_sons %>
+    <%= f.input :total_daughters %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

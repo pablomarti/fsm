@@ -1,0 +1,5 @@
+<fieldset>
+	<%= f.input :name, :label => "Nombre" %>
+	<%= f.input :last_name, :label => "Apellido" %>
+	<%= f.input :sex, :label => "Sexo", :as => :radio_buttons, :collection => [['Hombre', false], ['Mujer', true]], :checked => true %>
+</fieldset>

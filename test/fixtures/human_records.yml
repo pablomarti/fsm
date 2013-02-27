@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  educational_level: 
+  civil_state: 
+  pregnancy_state: 
+  ocupation: 
+  city: 
+  violence_kind: 
+
+two:
+  educational_level: 
+  civil_state: 
+  pregnancy_state: 
+  ocupation: 
+  city: 
+  violence_kind: 

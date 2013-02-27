@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  last_name: MyString
+  birthdate: 2013-02-26 19:09:59
+  sex: false
+  total_sons: 1
+  total_daughters: 1
+
+two:
+  name: MyString
+  last_name: MyString
+  birthdate: 2013-02-26 19:09:59
+  sex: false
+  total_sons: 1
+  total_daughters: 1

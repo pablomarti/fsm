@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  human_record: 
+  physical_condition: 
+  prior_criminal: false
+  aftermath_war: false
+  violence_witness: false
+  sexual_assault_antecedent: false
+
+two:
+  human_record: 
+  physical_condition: 
+  prior_criminal: false
+  aftermath_war: false
+  violence_witness: false
+  sexual_assault_antecedent: false

@@ -2,11 +2,15 @@ class SystemCasesController < ApplicationController
   # GET /system_cases
   # GET /system_cases.json
   def index
-    @system_cases = SystemCase.all
+    if can? :read, SystemCase
+      @system_cases = SystemCase.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @system_cases }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @system_cases }
+      end
+    else
+      redirect_to root_url
     end
   end
 
@@ -25,6 +29,7 @@ class SystemCasesController < ApplicationController
   # GET /system_cases/new.json
   def new
     @system_case = SystemCase.new
+    @system_case.human_records.build
 
     respond_to do |format|
       format.html # new.html.erb
