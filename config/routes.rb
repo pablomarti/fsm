@@ -1,5 +1,15 @@
 Fosalud::Application.routes.draw do
 
+
+  resources :human_records, :only=>[:index] do
+    member do
+    put  "victim_stabilized"
+    match  "active_listening", :via=>[:get,:post]
+    match  "heal_injuries", :via=>[:get,:post]
+    match  "demand", :via=>[:get,:post]
+    end
+  end
+
   resources :humen
 
 

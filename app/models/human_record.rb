@@ -25,7 +25,7 @@ class HumanRecord < ActiveRecord::Base
   end
 
   def start_process
-    start_case
+    #start_case
 
     if er
       make_medical_er
@@ -36,7 +36,25 @@ class HumanRecord < ActiveRecord::Base
     where(:state => "medical_assistance").order("er DESC, id ASC")
   end
 
+  #--------Estados----------
+  #registration=>Registro de la victima
+  #psicological_crisis => Crisis nerviosa al momento de recivir a la victima
+  #psicological_atention => Session de escucha Activa
+  #medical_atention => Atencion y Diagnostico medico
+  #legal_atention => Toma de datos del agresor y procedimiento de acciones legales
+
+  #--------Eventos------------
+  #crisis=> paso inmediato de registro a atencion de crisis psicologica en el momento que se recive a la victima si en dado caso esta en crisis
+  #victim_stabilized=> Paso de crisis psicologica a escucha activa cuando la victima esta estable osea no esta nerviosa o alterada
+  #active_listening=> Session de escucha activa la victima relata su historia y se procede a captar los detalles del hecho y el diagnostico psicologico
+  #                   Tambien se procede a hacer el diagnostico psicologico y phsicofisiologico
+  #                   Aqui se llena la parte que esta abajo del registro de los datos de la persona
+  #heal_injuries=>  Diagnostico y tratamiento medico va despues de la escucha activa
+  #                 Por el momento este solo debe ser un put y cambio de estado porque no se posee que informacion se debe suministrar
+  #demand=>Procedimientos legales, Aqui se toman los datos del agresor, su relacion con la victima y si procedera a poner demanda o no
+
   state_machine initial: :registration do
+    # Si la victima no esta en crisis nerviosa 
     event :crisis do
       transition :registration => :psicological_crisis   
     end
