@@ -36,34 +36,26 @@ class HumanRecord < ActiveRecord::Base
     where(:state => "medical_assistance").order("er DESC, id ASC")
   end
 
-  state_machine initial: :appearance do
-    event :start_case do
-      transition :appearance => :new_case
+  state_machine initial: :registration do
+    event :crisis do
+      transition :registration => :psicological_crisis   
     end
 
-    event :make_medical_er do #ER
-    	transition :new_case => :medical_assistance
+    event :victim_stabilized do
+      transition  :psicological_crisis => :psicological_atention  
     end
 
-    event :send_er_to_follow_case do #ER
-    	transition :medical_assistance => :conversation
+    event :active_listening do        
+      transition :registration => :psicological_atention   
     end
-
-    event :follow_case do
-    	transition :new_case => :conversation
-    end
-
-    event :give_medical_assistance do
-      transition :conversation => :medical_assistance
-    end
-
-    event :give_diagnosis do
-      transition :medical_assistance => :diagnosis
-    end
-
-    event :give_legal_assistance do
-      transition :diagnosis => :legal_assistance
-    end
+    
+    event :heal_injuries do  
+      transition :psicological_atention => :medical_atention
+    end 
+    
+    event :demand do   
+      transition :medical_atention => :legal_atention 
+    end   
   end
 
 end
