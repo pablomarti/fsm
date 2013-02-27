@@ -8,8 +8,9 @@ class HumanRecord < ActiveRecord::Base
   belongs_to :violence_kind
   belongs_to :system_case
   belongs_to :human
+  has_many :human_record_aggressions
   
-  attr_accessible :state, :er 
+  attr_accessible :state, :er, :legal_rep_name, :legal_rep_last_name
   attr_accessible :educational_level_id, :civil_state_id, :pregnancy_state_id, :ocupation_id, :city_id, :violence_kind_id, :system_case_id, :human_id
   attr_accessible :name, :last_name, :sex, :age
 

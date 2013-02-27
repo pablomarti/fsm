@@ -7,7 +7,15 @@
 	<%= f.association :pregnancy_state, :label => "Estado de embarazo", :include_blank => false %>
 	<%= f.association :ocupation, :label => "Ocupacion", :include_blank => false %>
 	<%= f.association :city, :label => "Municipio de procedencia", :include_blank => false %>
-	<%= f.association :violence_kind, :label => "Rol en evento", :include_blank => false %>
+	<%= f.input :violence_kind, :as => :hidden, :input_html => { :value => 1 } %>
   	
-  	<%= link_to "Eliminar", '#', class: "remove_fields" %>
+	<div>
+		<h4>Representante Legal</h4>
+		<%= f.input :legal_rep_name, :label => "Nombre" %>
+		<%= f.input :legal_rep_last_name, :label => "Apellido" %>
+	</div>
+
+  	<%= link_to "Eliminar victima", '#', class: "remove_fields" %>
+
+  	<hr />
 </fieldset>
