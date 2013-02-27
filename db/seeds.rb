@@ -1,36 +1,47 @@
 if Level.all.length == 0
 	puts "Levels"
-	Level.create!(:name => "Administrador")
-	Level.create!(:name => "Recepcionista")
-	Level.create!(:name => "Psicologo")
-	Level.create!(:name => "Medico")
-	Level.create!(:name => "Trabajador Social")
+	admin = Level.new(:name => "Administrador")
+	recepcionista = Level.new(:name => "Recepcionista")
+	psicologo = Level.new(:name => "Psicologo")
+	medico = Level.new(:name => "Medico")
+	social = Level.new(:name => "Trabajador Social")
+
+	admin.save
+	recepcionista.save
+	psicologo.save
+	medico.save
+	social.save
 
 	Role.destroy_all
 
-	Role.create!(:name => "Asistencia", :alias => "read case")
-	Role.create!(:name => "Crear caso", :alias => "create case")
-	Role.create!(:name => "Editar caso", :alias => "edit case")
-	Role.create!(:name => "Eliminar caso", :alias => "remove case")
+	#System cases
+	asistencia = Role.new(:name => "Asistencia", :alias => "read_case")
+	nuevo_caso = Role.new(:name => "Crear caso", :alias => "create_case")
+	editar_caso = Role.new(:name => "Editar caso", :alias => "edit_case")
+	eliminar_caso = Role.new(:name => "Eliminar caso", :alias => "remove_case")
+
+	asistencia.save
+	nuevo_caso.save
+	editar_caso.save
+	eliminar_caso.save
 
 	LevelRole.destroy_all
 
 	#Recepcionista
-	LevelRole.create!(:level_id => 2, :role_id => 1)
-	LevelRole.create!(:level_id => 2, :role_id => 2)
-	LevelRole.create!(:level_id => 2, :role_id => 4)
+	LevelRole.create!(:level_id => recepcionista.id, :role_id => asistencia.id)
+	LevelRole.create!(:level_id => recepcionista.id, :role_id => nuevo_caso.id)
 
 	#Psicologo
-	LevelRole.create!(:level_id => 3, :role_id => 1)
-	LevelRole.create!(:level_id => 3, :role_id => 3)
+	LevelRole.create!(:level_id => psicologo.id, :role_id => asistencia.id)
+	LevelRole.create!(:level_id => psicologo.id, :role_id => editar_caso.id)
 
 	#Medico
-	LevelRole.create!(:level_id => 4, :role_id => 1)
-	LevelRole.create!(:level_id => 4, :role_id => 3)
+	LevelRole.create!(:level_id => medico.id, :role_id => asistencia.id)
+	LevelRole.create!(:level_id => medico.id, :role_id => editar_caso.id)
 
 	#Trabajador Social
-	LevelRole.create!(:level_id => 5, :role_id => 1)
-	LevelRole.create!(:level_id => 5, :role_id => 3)
+	LevelRole.create!(:level_id => social.id, :role_id => asistencia.id)
+	LevelRole.create!(:level_id => social.id, :role_id => editar_caso.id)
 end
 
 if User.all.length == 0

@@ -36,6 +36,8 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_system_case_path,
-            :class => 'btn btn-primary' %>
+<% if can? :create, SystemCase %>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_system_case_path,
+              :class => 'btn btn-primary' %>
+<% end %>

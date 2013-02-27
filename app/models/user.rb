@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   def assign_user_roles
     user_roles.destroy_all
-    
+
     level.roles.map{ |role|
       UserRole.create!(:user_id => id, :role_id => role.id)
     }
@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 
   def role?(role_sym)
   	r = roles.has_role?(role_sym)
+    puts "MY ROLES: #{roles.inspect}"
     puts "HAS SYM #{role_sym}? #{r}"
     return r
   end
