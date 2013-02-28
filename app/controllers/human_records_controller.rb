@@ -35,10 +35,13 @@ class HumanRecordsController < ApplicationController
   end
 
   def demand
-    @human_record = HumanRecord.find(params[:id])
+    human_record = HumanRecord.find(params[:id])
+    @system_case = human_record.system_case
+    @system_case.human_records.build
   end
 
   def demand_perform
+    redirect_to demand_human_record_path(params[:id])
   end
 
 end
