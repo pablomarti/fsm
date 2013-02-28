@@ -1,11 +1,38 @@
+<% remove_text ||= "Eliminar victima" %>
+<% victim = victim.nil? ? true : victim %>
+
 <fieldset>
 	<%= render 'system_cases/human', f: f %>
 
-	<%= f.input :er, :label => "Emergencia" %>
+	<% if victim == true %>
+		<%= f.input :er, :label => "Emergencia" %>
+	<% end %>
+
 	<%= f.association :educational_level, :label => "Nivel educativo", :include_blank => false %>
 	<%= f.association :civil_state, :label => "Estado civil", :include_blank => false %>
-	<%= f.association :pregnancy_state, :label => "Estado de embarazo", :include_blank => false %>
+	
+	<% if victim %>
+		<%= f.association :pregnancy_state, :label => "Estado de embarazo", :include_blank => false %>
+	<% end %>
+	
 	<%= f.association :ocupation, :label => "Ocupacion", :include_blank => false %>
 	<%= f.association :city, :label => "Municipio de procedencia", :include_blank => false %>
-	<%= f.association :violence_kind, :label => "Rol en evento", :include_blank => false %>
+	
+	<% if victim %>
+		<%= f.input :violence_kind, :as => :hidden, :input_html => { :value => 1 } %>
+  	<% else %>
+		<%= f.association :violence_kind, :label => "Rol", :include_blank => false %>
+  	<% end %>
+
+  	<% if victim %>
+		<div>
+			<h4>Representante Legal</h4>
+			<%= f.input :legal_rep_name, :label => "Nombre" %>
+			<%= f.input :legal_rep_last_name, :label => "Apellido" %>
+		</div>
+	<% end %>
+
+  	<%= link_to remove_text, '#', class: "remove_fields" %>
+
+  	<hr />
 </fieldset>

@@ -5,7 +5,7 @@
 	</div>	
 
 	<%= f.fields_for :human_records do |builder| %>
-	  <%= render 'system_cases/human_record', f: builder %>
+	  <%= render :partial => 'system_cases/human_record', :locals => { f: builder, victim: false } %>
 	<% end %>
 
 	<div class="form-actions">

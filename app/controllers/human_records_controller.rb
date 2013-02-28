@@ -36,7 +36,8 @@ class HumanRecordsController < ApplicationController
 
   def demand
     human_record = HumanRecord.find(params[:id])
-    @system_case = human_record.system_case
+    #@system_case = human_record.system_case
+    @system_case = SystemCase.new
     @system_case.human_records.build
   end
 
