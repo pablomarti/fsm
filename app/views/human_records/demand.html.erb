@@ -1,22 +1,28 @@
-<%= simple_form_for @system_case, :url => demand_human_record_path(params[:id]), :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for @system_case, :url => demand_human_record_path, :html => { :class => 'form-horizontal' } do |f| %>
+	
+	<fieldset>
+		<legend>Asistencia Legal</legend>
 
-	<div class="page-header">
-	  <h1><%=t '.title', :default => 'Asistencia legal' %></h1>
-	</div>	
+		<div>
+			<strong>Datos de la victima</strong>
 
-	<h3>Involucrados</h3>
+			<div>
+				Nombre: <%= @human_record.human.full_name %><br />
+				Sexo: <%= @human_record.human.sex_name %><br />
+				Edad: <%= @human_record.human.age %>
+			</div>
+		</div>
+	</fieldset>
 
-	<%#= f.fields_for :human_records do |builder| %>
-	  <%#= render :partial => 'system_cases/human_record', :locals => { f: builder, victim: false, remove_text: "Eliminar involucrado" } %>
-	<%# end %>
+	<hr /> 
 
-  	<%#= link_to_add_fields "Agregar involucrado", f, :aggressors, "system_cases", { victim: false, remove_text: "Eliminar involucrado" } %>
+	<h4>Involucrados</h4>
 
-	<%= f.fields_for :aggressors do |builder| %>
-	  <%= render :partial => 'aggressor', :locals => { f: builder } %>
+	<%= f.fields_for :human_records do |builder| %>
+	  <%= render :partial => 'human_record', :locals => { f: builder } %>
 	<% end %>
 
-  	<%= link_to_add_fields "Agregar involucrado", f, :aggressors %>
+  	<%= link_to_add_fields "Agregar involucrado", f, :human_records %>
 
 	<div class="form-actions">
 		<%= f.button :submit, :class => 'btn-primary' %>

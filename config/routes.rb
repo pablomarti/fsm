@@ -9,11 +9,12 @@ Fosalud::Application.routes.draw do
 
   resources :human_records, :only=>[:index] do
     member do
-    put  "victim_stabilized"
-    match  "active_listening", :via=>[:get,:post]
-    put  "heal_injuries"
-    get :demand
-    put :demand, :action => :demand_perform
+      put  "victim_stabilized"
+      match  "active_listening", :via=>[:get,:post]
+      put  "heal_injuries"
+      get :demand
+      put :demand, :action => :demand_perform
+      get :demand_status
     end
   end
 
