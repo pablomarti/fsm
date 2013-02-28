@@ -1,4 +1,5 @@
 class HumanRecordsController < ApplicationController
+  
   def index
   end
 
@@ -34,5 +35,10 @@ class HumanRecordsController < ApplicationController
   end
 
   def demand
+    @human_record = HumanRecord.find(params[:id])
   end
+
+  def demand_perform
+  end
+
 end

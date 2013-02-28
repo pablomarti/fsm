@@ -6,7 +6,8 @@ Fosalud::Application.routes.draw do
     put  "victim_stabilized"
     match  "active_listening", :via=>[:get,:post]
     put  "heal_injuries"
-    match  "demand", :via=>[:get,:post]
+    get  :demand
+    post :demand, :action => :demand_perform
     end
   end
 
