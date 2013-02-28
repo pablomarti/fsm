@@ -1,0 +1,39 @@
+<fieldset>
+	<%= render :partial => 'system_cases/human', :locals => { f: f } %>
+
+	<%= f.association :physical_condition, :label => "Condicion fisica" %>
+	<%= f.input :prior_criminal, :label => "Antecedentes penales" %>
+	<%= f.input :aftermath_war, :label => "Secuela de guerra" %>
+	<%= f.input :violence_witness, :label => "Testigo de violencia" %>
+	<%= f.input :sexual_assault_antecedent, :label => "Antecedentes de agresion sexual" %>
+
+	<%= f.input :educational_level_id, :label => "Nivel educativo", collection: @educational_levels, :include_blank => false %>
+	<%= f.input :civil_state_id, :label => "Estado civil", collection: @civil_states, :include_blank => false %>
+	<%= f.input :ocupation_id, :label => "Ocupacion", collection: @ocupations, :include_blank => false %>
+	<%= f.input :city_id, :label => "Municipio de procedencia", collection: @cities, :include_blank => false %>
+	<%= f.input :violence_kind_id, :label => "Rol", collection: @violence_kinds, :include_blank => false %>
+
+	<h4>Condiciones</h4>
+	<%= f.input :human_condition_aux, :label => "Condicion", :input_html => { :class => "use_as_tag input-large", :multiple => "true" }, :collection => @human_conditions %>
+
+	<%#= f.fields_for :aggressor_human_conditions do |hc| %>
+		<%#= hc.input :human_condition, :label => "Condicion", :input_html => { :class => "human_condition" } %>
+		<%#= render :partial => "aggressor_human_condition", f: hc %>
+	<%# end %>
+
+	<%#= link_to_add_fields "Agregar condicion", f, :aggressor_human_conditions %>
+
+	<h4>Armas</h4>
+
+	<%= f.fields_for :weapons do |w| %>
+		<%= render :partial => "weapon", f: w %>
+	<% end %>
+
+	<%= link_to_add_fields "Agregar arma", f, :weapons %>
+
+	<br />
+
+  	<%= link_to "Eliminar involucrado", '#', class: "remove_fields" %>
+
+	<hr />
+</fieldset>

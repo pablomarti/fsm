@@ -195,3 +195,19 @@ unless Aggression.all.length > 0
 	Aggression.create!(:name=>"Quincenal", :aggression_kind_id=>4)
 end
 
+
+if HumanCondition.all.length == 0
+	puts "Human Conditions"
+
+	HumanCondition.create!(:name => "Alcoholizado/a")
+	HumanCondition.create!(:name => "Estable/Sobrio")
+	HumanCondition.create!(:name => "Trastorno psiquiatrico")
+	HumanCondition.create!(:name => "Drogado/a")
+end
+
+if WeaponKind.all.length == 0
+	puts "Weapon Kind"
+
+	WeaponKind.create!(:name => "Arma blanca")
+	WeaponKind.create!(:name => "Arma de fuego")
+end

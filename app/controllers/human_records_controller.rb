@@ -1,4 +1,5 @@
 class HumanRecordsController < ApplicationController
+  
   def index
   end
 
@@ -61,5 +62,22 @@ class HumanRecordsController < ApplicationController
   end
 
   def demand
+    human_record = HumanRecord.find(params[:id])
+    @system_case = human_record.system_case
+    #@system_case = SystemCase.new
+    #@system_case.human_records.build
+    @system_case.aggressors.build
+
+    @educational_levels = EducationalLevel.order("name ASC")
+    @civil_states = CivilState.order("name ASC")
+    @ocupations = Ocupation.order("name ASC")
+    @cities = City.order("name ASC")
+    @violence_kinds = ViolenceKind.order("name ASC")
+    @human_conditions = HumanCondition.order("name ASC")
   end
+
+  def demand_perform
+    redirect_to demand_human_record_path(params[:id])
+  end
+
 end

@@ -1,14 +1,20 @@
 Fosalud::Application.routes.draw do
 
 
+  resources :aggression_cases
+
+
+  resources :human_conditions
+
+
   resources :human_records, :only=>[:index] do
     member do
       put  "victim_stabilized"
       get  "active_listening" => "human_records#active_listening"
       put "active_listening" => "human_records#active_listening_perform"
       put  "heal_injuries"
-      get  "demand" => "human_records#demand"
-      post "demand" => "human_records#demand_perform"
+      get :demand
+      put :demand, :action => :demand_perform
     end
   end
 

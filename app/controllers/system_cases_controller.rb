@@ -45,19 +45,7 @@ class SystemCasesController < ApplicationController
   # POST /system_cases
   # POST /system_cases.json
   def create
-    ActiveRecord::Base.transaction do
-      begin
-        @humans_records = params[:system_case].delte(:human_records_attributes)
-        @emergency = false
-        @humans_records.each do |key,human_record|
-          @emergency = human_record.delete(:er)
-          
-        end
-        @system_case = SystemCase.new(params[:system_case])
-      rescue
-        raise ActiveRecord::Rollback
-      end
-    end
+    @system_case = SystemCase.new(params[:system_case])
 
     respond_to do |format|
       if @system_case.save
