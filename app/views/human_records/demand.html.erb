@@ -4,11 +4,19 @@
 	  <h1><%=t '.title', :default => 'Asistencia legal' %></h1>
 	</div>	
 
-	<%= f.fields_for :human_records do |builder| %>
-	  <%= render :partial => 'system_cases/human_record', :locals => { f: builder, victim: false } %>
+	<h3>Involucrados</h3>
+
+	<%#= f.fields_for :human_records do |builder| %>
+	  <%#= render :partial => 'system_cases/human_record', :locals => { f: builder, victim: false, remove_text: "Eliminar involucrado" } %>
+	<%# end %>
+
+  	<%#= link_to_add_fields "Agregar involucrado", f, :aggressors, "system_cases", { victim: false, remove_text: "Eliminar involucrado" } %>
+
+	<%= f.fields_for :aggressors do |builder| %>
+	  <%= render :partial => 'aggressor', :locals => { f: builder } %>
 	<% end %>
 
-  	<%= link_to_add_fields "Agregar involucrado", f, :human_records %>
+  	<%= link_to_add_fields "Agregar involucrado", f, :aggressors %>
 
 	<div class="form-actions">
 		<%= f.button :submit, :class => 'btn-primary' %>

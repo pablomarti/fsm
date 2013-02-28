@@ -2,7 +2,7 @@
 <% victim = victim.nil? ? true : victim %>
 
 <fieldset>
-	<%= render 'system_cases/human', f: f %>
+	<%= render :partial => 'system_cases/human', :locals => { f: f } %>
 
 	<% if victim == true %>
 		<%= f.input :er, :label => "Emergencia" %>

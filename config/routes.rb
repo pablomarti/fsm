@@ -1,6 +1,12 @@
 Fosalud::Application.routes.draw do
 
 
+  resources :aggression_cases
+
+
+  resources :human_conditions
+
+
   resources :human_records, :only=>[:index] do
     member do
     put  "victim_stabilized"
