@@ -1,0 +1,8 @@
+<fieldset>
+	<legend>Agresiones realizadas</legend>
+	<%@aggressions_list.each do |key, value|%>
+		<div class="aggression-type-field">
+			<%=f.input :aggressions, collection: value, :label=>key.to_s.capitalize.gsub("_"," "),:input_html => { :class => "use_as_tag input-large", :multiple => "true" }%>
+		</div>
+	<%end%>
+</fieldset>

@@ -1,0 +1,17 @@
+<fieldset>
+	<legend>Diagonostico</legend>
+	<%=f.input :physical_disability%>
+	<%=f.input :mental_disability%>
+	<%=f.input :violence_witness%>
+	<%=f.input :sexual_assault_antecedent%>
+	<%=f.input :diagnosis_description%>
+	<div class="aggression-type-field">
+		<%=f.input :emotional_conditions, collection: EmotionalCondition.all, :label=>"Condiciones emocionales",:input_html => { :class => "use_as_tag input-large", :multiple => "true" }%>
+	</div>
+
+
+	<div class="aggression-type-field">
+		<%=f.input :psycho_physio_alterations, collection: PsychoPhysioAlteration.all, :label=>"Alteracions psicofisiologicas",:input_html => { :class => "use_as_tag input-large", :multiple => "true" }%>
+	</div>
+
+</fieldset>

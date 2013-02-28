@@ -1,0 +1,33 @@
+<fieldset>
+		<legend>Detalles de los hechos</legend>
+	<div class="control-group">
+    	<%= label :system_case, :city_id, "Municipio del suceso", :class => 'control-label' %>
+	    <div class="controls">
+	  		<%= collection_select :system_case, :city_id, City.all,:id, :name, :include_blank => false%>
+	    </div>
+  	</div>
+  	<div class="control-group">
+    	<%= label :system_case, :zone_kind_id, "Zona", :class => 'control-label' %>
+	    <div class="controls">
+	  		<%= collection_select :system_case, :zone_kind_id, ZoneKind.all,:id, :name, :include_blank => false%>
+	    </div>
+  	</div>
+  	<div class="control-group">
+    	<%= label :system_case, :agression_date, "Fecha de agresion", :class => 'control-label' %>
+	    <div class="controls">
+	  		<%= datetime_select :system_case, :aggression_date %>
+	    </div>
+  	</div>
+  	<div class="control-group">
+    	<%= label :system_case, :recidivism, "Reincidencia", :class => 'control-label' %>
+	    <div class="controls">
+	  		<%= check_box :system_case, :recidivism %>
+	    </div>
+  	</div>
+  	<div class="control-group">
+    	<%= label :system_case, :complaint, "Denuncia", :class => 'control-label' %>
+	    <div class="controls">
+	  		<%= check_box :system_case, :complaint %>
+	    </div>
+  	</div>
+</fieldset>
