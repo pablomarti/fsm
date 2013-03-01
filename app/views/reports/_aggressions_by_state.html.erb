@@ -1,23 +1,26 @@
 <div class="container_chart">
-<!-- <table>
+
+<table>
 	<tr>
-		<td>Edad</td><td>Total</td> -->
+		<td>Edad</td><td>Total</td>
 		<% categories = []%>
 		<% items_age = []%>
+        <% state_problem =[]%>
 		<% @data.each do |item| %>
 			<%categories.push(item.label) %>
 			<%items_age.push(item.total)%>
-				<% item.label.to_s%>
+             <% state_problem.push(item.label2)%>
+				<%#= item.label.to_s%>
 				<!-- <td><%#= item.label2.to_s%></td> -->
-				<% item.total.to_s%>
+				<%#= item.total.to_s%>
 		<% end %>
-<!-- 		<hr>
+		<hr>
 	</tr>
-</table> -->
-
+</table>
 
 <%#= categories%>
 <%#= items_age%>
+<%#= state_problem%>
 <div class="clear"></div>
 
 
@@ -31,7 +34,7 @@ $(function () {
         chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'container_grafics',
-                type: 'area',
+                type: 'line',
                 marginRight: 130,
                 marginBottom: 25
             },
@@ -80,7 +83,7 @@ $(function () {
                 borderWidth: 0
             },
             series: [{
-                name: 'San Salvador',
+                name: '<%= state_problem[0]%>',
                 data: <%= items_age%>
             }]
         });

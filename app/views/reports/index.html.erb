@@ -1,3 +1,17 @@
 <div id="chart">
-	<%= render "chart" %>
+	<div class="page-header">
+  		<h1>Graficas Generales</h1>
+	</div>
+	<div class="links_reports">
+		<ul id="type_reports">
+			<li>
+				<%= link_to "Agresiones por Edad", type_reports_path("aggressions_by_age","Cantidad de Agresiones por edad"), :class =>"reports_links btn btn-primary" , :remote => true%>
+			</li>
+			<li>
+				<%= link_to "Agresiones por Departamento", aggressions_by_state_path("aggressions_by_state_and_age","Cantidad de Agresiones por Departamento"), :class =>"reports_links btn btn-primary" , :remote => true%>
+			</li>
+		</ul>
+	</div>
+	<div id="container_chart">
+	</div>
 </div>

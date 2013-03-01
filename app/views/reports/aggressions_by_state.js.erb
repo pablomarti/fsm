@@ -1,0 +1,6 @@
+$("div#container_chart").html("<%= j render 'reports/aggressions_by_state'%>");
+setTimeout(function() {
+	$('div.container_chart','div#container_chart').fadeIn();
+}, 50);
+
+height_content_div();

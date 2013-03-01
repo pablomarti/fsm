@@ -21,7 +21,7 @@ function height_content_div(){
 	var height_container = $("div#main_container").height();
 	if (height_container <= height_window){
 		$("div#main_container").css({
-			height:height_window - 155
+			height:height_window - 170
 		})
 	};
 	//console.log(height_container);
