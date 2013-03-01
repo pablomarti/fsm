@@ -51,8 +51,8 @@ ul#dasboard_options{
 			box-shadow:0px 0px 4px #777;
 		}
 		div{
-			width:120px;
-			height:90px;
+			width:160px;
+			height:140px;
 			background: #ffffff; /* Old browsers */
 			background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
 			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
@@ -66,14 +66,14 @@ ul#dasboard_options{
 				-o-transition: all 0.25s ease-in-out;
 				-ms-transition: all 0.25s ease-in-out;
 				transition: all 0.25s ease-in-out;
-			border:1px solid #DADADA;
+			border:1px solid #D9D9D9;
 			-webkit-border-radius: 4px;
 			-moz-border-radius: 4px;
 			border-radius: 4px;
 			position:relative;
 			span{
-				width:120px;
-				height:90px;
+				width:160px;
+				height:140px;
 				display:table-cell;
 				vertical-align:middle;
 				text-align:center;
