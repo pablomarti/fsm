@@ -6,5 +6,6 @@ class State < ActiveRecord::Base
   attr_accessible :cities_attributes
 
   accepts_nested_attributes_for :cities, allow_destroy: true
+  validates :name,  :presence => true, :uniqueness => true
   
 end

@@ -8,6 +8,8 @@ class Role < ActiveRecord::Base
 
   before_save :fix_alias
 
+  validates :name, :presence => true, :uniqueness => true
+  
   def fix_alias
     self.alias.downcase.gsub!(/\s+/, "_")
   end

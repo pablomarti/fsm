@@ -1,6 +1,8 @@
 Fosalud::Application.routes.draw do
 
 
+  get "graphics/index"
+
   resources :aggression_cases
 
 
