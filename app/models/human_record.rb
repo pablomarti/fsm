@@ -92,29 +92,32 @@ class HumanRecord < ActiveRecord::Base
     end
 
     event :victim_stabilized do
-      transition  :psicological_crisis => :psicological_atention  
+      transition  :psicological_crisis => :psicological_attention  
     end
 
     event :active_listening do        
-      transition :registration => :psicological_atention   
+      transition :registration => :psicological_attention   
     end
     
     event :heal_injuries do  
-      transition :psicological_atention => :medical_atention
+      transition :psicological_attention => :medical_attention
     end 
     
     event :demand do   
-      transition :medical_atention => :legal_atention 
+      transition :medical_attention => :legal_attention 
     end   
+
+    event :end_and_follow do
+      transition :legal_atenttion => :following
+    end
   end
 
   ########################################### QUERIES
   scope :active_cases, where("state <> 'registration'").order("id ASC")
-  scope :active_cases_for_demand, where(:state => "legal_atention").order("id ASC")
-  scope :active_cases_for_heal_injuries, where(:state => "medical_atention").order("id ASC")
-  scope :active_cases_for_active_listening, where(:state => "psicological_atention").order("id ASC")
-  scope :active_cases_for_crisis, where(:state => "psicological_crisis").order("id ASC")
-  scope :registered_cases, where(:state => "registration").order("id ASC")
-
+  scope :active_cases_for_demand, where(:state => "legal_attention",:violence_kind_id=>1).order("id ASC")
+  scope :active_cases_for_heal_injuries, where(:state => "medical_attention",:violence_kind_id=>1).order("id ASC")
+  scope :active_cases_for_active_listening, where(:state => "psicological_attention",:violence_kind_id=>1).order("id ASC")
+  scope :active_cases_for_crisis, where(:state => "psicological_crisis",:violence_kind_id=>1).order("id ASC")
+  scope :registered_cases, where(:state => "registration",:violence_kind_id=>1).order("id ASC")
 
 end

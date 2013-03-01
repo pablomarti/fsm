@@ -16,7 +16,7 @@ class AggressionKindsController < ApplicationController
     @aggression_kind = AggressionKind.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html  show.html.erb
       format.json { render json: @aggression_kind }
     end
   end
@@ -25,7 +25,6 @@ class AggressionKindsController < ApplicationController
   # GET /aggression_kinds/new.json
   def new
     @aggression_kind = AggressionKind.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @aggression_kind }

@@ -6,9 +6,9 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th>Nombre</th>
       <th><%= model_class.human_attribute_name(:alias) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th>Creado</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -20,7 +20,7 @@
         <td><%= role.alias %></td>
         <td><%=l role.created_at %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          <%= link_to t('.edit', :default => "Editar"),
                       edit_role_path(role), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       role_path(role),

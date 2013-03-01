@@ -112,19 +112,18 @@ class HumanRecordsController < ApplicationController
     @human_record = HumanRecord.find(params[:id])
     @system_case = @human_record.system_case
     @system_case.human_records.build
-    #@system_case.human_records.aggressors.build
 
-    @educational_levels = EducationalLevel.order("name ASC")
-    @civil_states = CivilState.order("name ASC")
-    @ocupations = Ocupation.order("name ASC")
-    @cities = City.order("name ASC")
-    @violence_kinds = ViolenceKind.order("name ASC")
+    #@educational_levels = EducationalLevel.order("name ASC")
+    #@civil_states = CivilState.order("name ASC")
+    #@ocupations = Ocupation.order("name ASC")
+    #@cities = City.order("name ASC")
+    @violence_kinds = ViolenceKind.all_except_victim.order("name ASC")
     @human_conditions = HumanCondition.order("name ASC")
     @weapons = WeaponKind.order("name ASC")
   end
 
   def demand_perform
-    #@human_record = HumanRecord.find(params[:id])
+    @human_record = HumanRecord.find(params[:id])
     #@system_case = @human_record.system_case
     @system_case = SystemCase.find(params[:id])
 
@@ -141,6 +140,7 @@ class HumanRecordsController < ApplicationController
   def actual_status
     @human_record = HumanRecord.find(params[:id])
     @system_case = @human_record.system_case
+    @human_records = @system_case.human_records.where("id <> ?", @human_record.id)
   end
 
 end

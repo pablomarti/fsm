@@ -6,7 +6,8 @@
 		<%= f.association :civil_state, :label => "Estado civil", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
 		<%= f.association :ocupation, :label => "Ocupacion", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
 		<%= f.association :city, :label => "Municipio de procedencia", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
-		<%= f.association :violence_kind, :label => "Rol", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+		<%#= f.association :violence_kind, :label => "Rol", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+		<%= f.input :violence_kind_id, :label => "Rol", collection: @violence_kinds, :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
 
 		<% f.object.aggressors.build %>
 		<%= f.fields_for :aggressors do |a_builder| %>
@@ -30,4 +31,12 @@
 
 		<%= link_to "Eliminar involucrado", '#', class: "remove_fields" %>
 	</fieldset>
+
+	<hr />
 </div>
+
+<script type="text/javascript">
+	$(function() {
+		$(".use_as_tag").select2(); 
+	});
+</script>

@@ -1,22 +1,38 @@
-<%= simple_form_for @system_case, :url => demand_human_record_path, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for @system_case, :url => demand_human_record_path(@system_case), :html => { :class => 'form-horizontal' } do |f| %>
 	
-	<fieldset>
-		<legend>Asistencia Legal</legend>
+	<h1>Asistencia Legal</h1>
 
-		<div>
-			<strong>Datos de la victima</strong>
+	<hr />
 
-			<div>
-				Nombre: <%= @human_record.human.full_name %><br />
-				Sexo: <%= @human_record.human.sex_name %><br />
-				Edad: <%= @human_record.human.age %>
-			</div>
-		</div>
-	</fieldset>
+	<h3>Datos</h3>
+
+	<dl class="dl-horizontal">
+	  <dt><strong>Caso:</strong></dt>
+	  <dd><%= link_to "##{@human_record.system_case.id}", system_case_path(@human_record.system_case) %></dd>
+	  <dt><strong>Nombre:</strong></dt>
+	  <dd><%= @human_record.human.full_name %></dd>
+	  <dt><strong>Sexo:</strong></dt>
+	  <dd><%= @human_record.human.sex_name %></dd>
+	  <dt><strong>Edad:</strong></dt>
+	  <dd><%= @human_record.human.age %></dd>
+	</dl>
+	
+	<dl class="dl-horizontal">
+	  <dt><strong>Municipio:</strong></dt>
+	  <dd><%= @human_record.system_case.city.name %></dd>
+	  <dt><strong>Tipo de zona:</strong></dt>
+	  <dd><%= @human_record.system_case.zone_kind.name %></dd>
+	  <dt><strong>Fecha de agresion:</strong></dt>
+	  <dd><%= @human_record.system_case.aggression_date.strftime("%d/%m/%Y") %></dd>
+	  <dt><strong>Reincidencia:</strong></dt>
+	  <dd><%= @human_record.system_case.recidivism ? "Si" : "No" %></dd>
+	  <dt><strong>Denuncia:</strong></dt>
+	  <dd><%= @human_record.system_case.complaint ? "Si" : "No" %></dd>
+	</dl>
 
 	<hr /> 
 
-	<h4>Involucrados</h4>
+	<h3>Involucrados</h3>
 
 	<%= f.fields_for :human_records do |builder| %>
 	  <%= render :partial => 'human_record', :locals => { f: builder } %>
@@ -25,7 +41,7 @@
   	<%= link_to_add_fields "Agregar involucrado", f, :human_records %>
 
 	<div class="form-actions">
-		<%= f.button :submit, :class => 'btn-primary' %>
+		<%= f.button :submit, "Guardar", :class => 'btn-primary' %>
 		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
 	            system_cases_path, :class => 'btn' %>
 	</div>

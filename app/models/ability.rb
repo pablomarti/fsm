@@ -23,7 +23,7 @@ class Ability
       if user.role? :edit_case
         can :read, HumanRecord
 
-        if user.role? :legal_atention
+        if user.role? :legal_attention
           can :give_legal_advice, HumanRecord
         end
 

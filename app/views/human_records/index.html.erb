@@ -33,7 +33,8 @@
 
           <%if can? :do_med_diagnosis, HumanRecord%>
             <%= link_to t('.edit', :default => "Atender Medicamente"), heal_injuries_human_record_path(human_record),:method=>:put, :class => 'btn btn-mini' %>
-          <% end %>          
+          <% end %>         
+          <%= link_to t('.edit', :default => "Estado"), actual_status_human_record_path(human_record), :class => 'btn btn-mini' %> 
         </td>
       </tr>
     <% end %>

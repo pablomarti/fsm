@@ -1,7 +1,7 @@
 <%= simple_form_for @level, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :name %>
+  <%= f.input :name, :label => "Nombre" %>
   <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= f.button :submit, "Guardar", :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 levels_path, :class => 'btn' %>
   </div>

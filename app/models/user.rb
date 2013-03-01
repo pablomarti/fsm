@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   attr_accessible :active, :last_name, :name, :level_id
 
   after_save :assign_user_roles
-
+  validates :name, :last_name, :email,  :presence => true, :uniqueness => true
   def assign_user_roles
     user_roles.destroy_all
 
