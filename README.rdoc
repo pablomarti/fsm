@@ -1,7 +1,7 @@
 == Fosalud Management FSM
 
 Prototipo de sistema administrativo para Fosalud en El Salvador. Desarrollado
-Ruby on Rails 3.2.12 en la Hackathon por la lucha contra la violencia domestica
+sobre Ruby on Rails 3.2.12 en la Hackathon por la lucha contra la violencia domestica
 en la Universidad Jose Simeon Cañas.
 
 == Objetivos
