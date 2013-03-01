@@ -53,7 +53,7 @@ class Aggressor < ActiveRecord::Base
 
     weapon_aux.map{ |item|
       if item != "" && !WeaponKind.find(item).nil?
-        weapons << Weapon.new(weapon_id: item.to_i)
+        weapons << Weapon.new(weapon_kind_id: item.to_i)
       end
     }
   end

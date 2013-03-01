@@ -106,11 +106,11 @@ class HumanRecord < ActiveRecord::Base
   ########################################### QUERIES
 
   def self.active_cases
-    where("state <> 'registration'").order("id ASC")
+    where("state <> 'registration' AND violence_kind_id=1").order("id ASC")
   end
 
   def self.active_cases_for_demand
-    where(:state => "demand").order("id ASC")
+    where(state: "demand", violence_kind_id: 1).order("id ASC")
   end
 
 end
