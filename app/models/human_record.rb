@@ -12,15 +12,17 @@ class HumanRecord < ActiveRecord::Base
 
   has_many :human_record_aggressions
   has_many :aggressions,:through=>:human_record_aggressions
-  has_many :aggressors #has_one
+  has_many :aggressors #
+  has_one  :diagnosis
   
-  attr_accessible :state, :er, :legal_rep_name, :legal_rep_last_name
+  attr_accessible :state, :er, :legal_rep_name, :legal_rep_last_name, :aggression_ids
   attr_accessible :educational_level_id, :civil_state_id, :pregnancy_state_id, :ocupation_id, :city_id, :violence_kind_id, :system_case_id, :human_id
   attr_accessible :aggression_case_id
   attr_accessible :name, :last_name, :sex, :age
-  attr_accessible :aggressors_attributes
+  attr_accessible :aggressors_attributes, :diagnosis_attributes
 
   accepts_nested_attributes_for :aggressors, allow_destroy: true
+  accepts_nested_attributes_for :diagnosis
 
   attr_accessor :name, :last_name, :sex, :age
 

@@ -4,9 +4,8 @@
 	
 	<%= render 'human_record_aggressions', f: f %>
 
-	<%= f.fields_for :diagnoses do |builder| %>
-	<%= render 'diagnoses', f: builder %>
-
+	<%= f.fields_for :diagnosis do |builder| %>
+		<%= render 'diagnoses', f: builder %>
 	<%end%>
 
 	

@@ -1,5 +1,3 @@
-#!/bin/env ruby
-# encoding: utf-8
 if Level.all.length == 0
 	puts "Levels"
 	admin = Level.new(:name => "Administrador")
@@ -21,6 +19,9 @@ if Level.all.length == 0
 	nuevo_caso = Role.new(:name => "Crear caso", :alias => "create_case")
 	editar_caso = Role.new(:name => "Editar caso", :alias => "edit_case")
 	eliminar_caso = Role.new(:name => "Eliminar caso", :alias => "remove_case")
+	atencion_psicologica = Role.new(:name => "Detallar escucha activa", :alias => "psico_attention")
+	atencion_medica = Role.new(:name => "Atender medicamente", :alias => "med_attention")
+	atencion_legal = Role.new(:name => "Asesorar Legalmente", :alias => "legal_attention")
 
 	asistencia.save
 	nuevo_caso.save
@@ -36,14 +37,17 @@ if Level.all.length == 0
 	#Psicologo
 	LevelRole.create!(:level_id => psicologo.id, :role_id => asistencia.id)
 	LevelRole.create!(:level_id => psicologo.id, :role_id => editar_caso.id)
+	LevelRole.create!(:level_id => psicologo.id, :role_id => atencion_psicologica.id)
 
 	#Medico
 	LevelRole.create!(:level_id => medico.id, :role_id => asistencia.id)
 	LevelRole.create!(:level_id => medico.id, :role_id => editar_caso.id)
+	LevelRole.create!(:level_id => medico.id, :role_id => atencion_medica.id)
 
 	#Trabajador Social
 	LevelRole.create!(:level_id => social.id, :role_id => asistencia.id)
 	LevelRole.create!(:level_id => social.id, :role_id => editar_caso.id)
+	LevelRole.create!(:level_id => social.id, :role_id => atencion_legal.id)
 end
 
 if User.all.length == 0
@@ -128,73 +132,6 @@ if Ocupation.all.length == 0
 	Ocupation.create!(:name => "N/A")
 	Ocupation.create!(:name => "Ninguno")
 end
-unless EmotionalCondition.all.length > 0
-	puts "Creating emotional  condition"
-	EmotionalCondition.create!(:name => "Agresividad")
-	EmotionalCondition.create!(:name => "Angustia")
-	EmotionalCondition.create!(:name => "Tristeza")
-	EmotionalCondition.create!(:name => "Impotencia")
-	EmotionalCondition.create!(:name => "Culpa")
-	EmotionalCondition.create!(:name => "Indiferencia")
-	EmotionalCondition.create!(:name => "Miedo")
-	EmotionalCondition.create!(:name => "Enojo")
-	EmotionalCondition.create!(:name => "Confusión")
-	EmotionalCondition.create!(:name => "Inseguridad")
-	EmotionalCondition.create!(:name => "Intencion Suicida")
-	EmotionalCondition.create!(:name => "Ideación Suicida")
-	EmotionalCondition.create!(:name => "Intento Homicida")
-	EmotionalCondition.create!(:name => "Ideación Homicida")
-end
-unless PsychoPhysioAlteration.all.length > 0
-	print "Creating psycophisiological condition\n"
-	PsychoPhysioAlteration.create!(:name => "Alteracion del sueño")
-	PsychoPhysioAlteration.create!(:name => "Alteracion del apetito")
-	PsychoPhysioAlteration.create!(:name => "Alteracion del gastrointestinal")
-	PsychoPhysioAlteration.create!(:name => "Dolor de cabeza")
-	PsychoPhysioAlteration.create!(:name => "Palpitacion")
-	PsychoPhysioAlteration.create!(:name => "Suduracion excesiva")
-	PsychoPhysioAlteration.create!(:name => "Temblor del cuerpo")
-	PsychoPhysioAlteration.create!(:name => "Tic nervioso")
-	PsychoPhysioAlteration.create!(:name => "Alteracion de la piel")
-	PsychoPhysioAlteration.create!(:name => "Mareos")
-end
-unless AggressionKind.all.length > 0
-	puts "Creating Aggressions Kinds"
-	AggressionKind.create!(:name=>"Formas de violencia")
-	AggressionKind.create!(:name=>"Tipo de lessiones fisicas")
-	AggressionKind.create!(:name=>"Tipos de Agresion sexual")
-	AggressionKind.create!(:name=>"Frecuencia de la agresion")
-end
-
-unless Aggression.all.length > 0
-	puts "Creating Aggressions for Aggression Kind 1"
-	Aggression.create!(:name=>"Patrimonial", :aggression_kind_id=>1)
-	Aggression.create!(:name=>"Financiera", :aggression_kind_id=>1)
-	Aggression.create!(:name=>"Social", :aggression_kind_id=>1)
-	Aggression.create!(:name=>"Sexual", :aggression_kind_id=>1)
-
-
-	puts "Creating Aggressions for Aggression Kind 2"
-	Aggression.create!(:name=>"Golpes", :aggression_kind_id=>2)
-	Aggression.create!(:name=>"Armas de fuego", :aggression_kind_id=>2)
-	Aggression.create!(:name=>"Arma blanca", :aggression_kind_id=>2)
-	Aggression.create!(:name=>"Mordidas", :aggression_kind_id=>2)
-	Aggression.create!(:name=>"Quemaduras", :aggression_kind_id=>2)
-	Aggression.create!(:name=>"Halones de pelo", :aggression_kind_id=>2)
-	Aggression.create!(:name=>"Empujones", :aggression_kind_id=>2)
-	Aggression.create!(:name=>"Amenazas", :aggression_kind_id=>2)
-
-	puts "Creating Aggressions for Aggression Kind 3"
-	Aggression.create!(:name=>"Vaginal", :aggression_kind_id=>3)
-	Aggression.create!(:name=>"Anal", :aggression_kind_id=>3)
-	Aggression.create!(:name=>"Oral", :aggression_kind_id=>3)
-
-	puts "Creating Aggressions for Aggression Kind 4"
-	Aggression.create!(:name=>"Diraria", :aggression_kind_id=>4)
-	Aggression.create!(:name=>"Semanal", :aggression_kind_id=>4)
-	Aggression.create!(:name=>"Quincenal", :aggression_kind_id=>4)
-end
-
 
 if HumanCondition.all.length == 0
 	puts "Human Conditions"

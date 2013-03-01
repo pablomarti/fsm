@@ -16,12 +16,25 @@ class Ability
         can :create, SystemCase
       end
 
-      if user.role? :update_case
+      if user.role? :create_case or user.role? :legal_attention or user.role? :psico_attention or user.role? :med_attention
+        can :change_state, HumanRecord
+      end
+
+      if user.role? :edit_case
         can :read, HumanRecord
 
-        if user.role? :demand
-          can :manage_demand, HumanRecord
+        if user.role? :legal_attention
+          can :give_legal_advice, HumanRecord
         end
+
+        if user.role? :psico_attention
+          can :do_psico_diagnosis, HumanRecord
+        end
+
+        if user.role? :med_attention
+          can :do_med_diagnosis, HumanRecord
+        end
+
       end
     end
 
