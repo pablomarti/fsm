@@ -10,4 +10,8 @@ class Human < ActiveRecord::Base
   	name.to_s + " " + last_name.to_s
   end
 
+  def sex_name
+  	sex ? "Femenino" : "Masculino"
+  end
+
 end

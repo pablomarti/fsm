@@ -1,0 +1,33 @@
+<div class="<%= !f.object.id.nil? ? 'hide_block' : '' %>">
+	<fieldset>
+		<%= render :partial => 'system_cases/human', :locals => { f: f } %>
+
+		<%= f.association :educational_level, :label => "Nivel educativo", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+		<%= f.association :civil_state, :label => "Estado civil", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+		<%= f.association :ocupation, :label => "Ocupacion", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+		<%= f.association :city, :label => "Municipio de procedencia", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+		<%= f.association :violence_kind, :label => "Rol", :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+
+		<% f.object.aggressors.build %>
+		<%= f.fields_for :aggressors do |a_builder| %>
+			<%= a_builder.input :prior_criminal, label: "Antecedentes penales", as: :radio_buttons, collection: [['Si', true], ['No', false]], checked: false, item_wrapper_class: 'inline' %>
+			<%= a_builder.input :aftermath_war, label: "Secuela de guerra", as: :radio_buttons, collection: [['Si', true], ['No', false]], checked: false, item_wrapper_class: 'inline' %>
+			<%= a_builder.input :violence_witness, label: "Testigo de violencia", as: :radio_buttons, collection: [['Si', true], ['No', false]], checked: false, item_wrapper_class: 'inline' %>
+			<%= a_builder.input :sexual_assault_antecedent, label: "Antecedentes de agresion sexual", as: :radio_buttons, collection: [['Si', true], ['No', false]], checked: false, item_wrapper_class: 'inline' %>
+
+			<%#= a_builder.input :educational_level_id, :label => "Nivel educativo", collection: @educational_levels, :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+			<%#= a_builder.input :civil_state_id, :label => "Estado civil", collection: @civil_states, :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+			<%#= a_builder.input :ocupation_id, :label => "Ocupacion", collection: @ocupations, :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+			<%#= a_builder.input :city_id, :label => "Municipio de procedencia", collection: @cities, :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+			<%#= a_builder.input :violence_kind_id, :label => "Rol", collection: @violence_kinds, :include_blank => false, :input_html => { :class => "use_as_tag input-large" } %>
+
+			<%= a_builder.input :human_condition_aux, :label => "Condicion", :input_html => { :class => "use_as_tag input-large", :multiple => "true" }, :collection => @human_conditions %>
+
+			<%= a_builder.input :weapon_aux, :label => "Armas", :input_html => { :class => "use_as_tag input-large", :multiple => "true" }, :collection => @weapons %>
+		<% end %>
+
+		<br />
+
+		<%= link_to "Eliminar involucrado", '#', class: "remove_fields" %>
+	</fieldset>
+</div>

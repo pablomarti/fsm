@@ -18,11 +18,19 @@ class HumanRecord < ActiveRecord::Base
   attr_accessible :educational_level_id, :civil_state_id, :pregnancy_state_id, :ocupation_id, :city_id, :violence_kind_id, :system_case_id, :human_id
   attr_accessible :aggression_case_id
   attr_accessible :name, :last_name, :sex, :age
+  attr_accessible :aggressors_attributes
+
+  accepts_nested_attributes_for :aggressors, allow_destroy: true
 
   attr_accessor :name, :last_name, :sex, :age
 
+  #after_find :set_human_properties
   before_create :create_human
   after_create :start_process
+
+  def set_human_properties
+    name = human.name rescue ""
+  end
 
   def create_human
     h = Human.new(:name => name, :last_name => last_name, :sex => sex, :age => age)
@@ -31,15 +39,30 @@ class HumanRecord < ActiveRecord::Base
   end
 
   def start_process
-    #start_case
-
     if er
-      make_medical_er
+      crisis
+    else
+      active_listening
     end
   end
 
   def self.medical_assistance_list
     where(:state => "medical_assistance").order("er DESC, id ASC")
+  end
+
+  def translate_state
+    return case state
+        when "psicological_crisis"
+                  "Crisis"
+        when "psicological_atention"
+                  "Escucha Activa"
+        when "registration"
+                  "Toma de datos"
+        when "medical_atention"
+                  "Atencion medica"
+        when "legal_atention"
+                  "Atencion legal"
+    end          
   end
 
   #--------Estados----------
@@ -80,6 +103,16 @@ class HumanRecord < ActiveRecord::Base
     event :demand do   
       transition :medical_atention => :legal_atention 
     end   
+  end
+
+  ########################################### QUERIES
+
+  def self.active_cases
+    where("state <> 'registration'").order("id ASC")
+  end
+
+  def self.active_cases_for_demand
+    where(:state => "demand").order("id ASC")
   end
 
 end

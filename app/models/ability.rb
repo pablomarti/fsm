@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new #Guest user
 
-    if user.has_level? "Administrador"
+    if user.role? :admin
       can :manage, :all 
     else
       if user.role? :read_case
@@ -14,6 +14,14 @@ class Ability
       if user.role? :create_case
         can :read, SystemCase
         can :create, SystemCase
+      end
+
+      if user.role? :update_case
+        can :read, HumanRecord
+
+        if user.role? :demand
+          can :manage_demand, HumanRecord
+        end
       end
     end
 

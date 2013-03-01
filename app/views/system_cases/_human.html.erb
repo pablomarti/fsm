@@ -1,6 +1,6 @@
 <fieldset>
 	<%= f.input :name, :label => "Nombre" %>
 	<%= f.input :last_name, :label => "Apellido" %>
-	<%= f.input :sex, :label => "Sexo", :as => :radio_buttons, :collection => [['Hombre', false], ['Mujer', true]], :checked => true %>
+	<%= f.input :sex, label: "Sexo", as: :radio_buttons, collection: [['Hombre', false], ['Mujer', true]], checked: true, item_wrapper_class: 'inline' %>
 	<%= f.input :age, :label => "Edad", :as => :integer, :input_html => { :value => 22 } %>
 </fieldset>

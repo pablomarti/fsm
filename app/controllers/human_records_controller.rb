@@ -1,6 +1,16 @@
 class HumanRecordsController < ApplicationController
   
   def index
+    if can? :read, HumanRecord
+      @human_records = current_user.get_active_cases
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @human_records }
+      end
+    else
+      redirect_to root_url
+    end
   end
 
   def victim_stabilized
@@ -62,11 +72,10 @@ class HumanRecordsController < ApplicationController
   end
 
   def demand
-    human_record = HumanRecord.find(params[:id])
-    @system_case = human_record.system_case
-    #@system_case = SystemCase.new
-    #@system_case.human_records.build
-    @system_case.aggressors.build
+    @human_record = HumanRecord.find(params[:id])
+    @system_case = @human_record.system_case
+    @system_case.human_records.build
+    #@system_case.human_records.aggressors.build
 
     @educational_levels = EducationalLevel.order("name ASC")
     @civil_states = CivilState.order("name ASC")
@@ -74,10 +83,27 @@ class HumanRecordsController < ApplicationController
     @cities = City.order("name ASC")
     @violence_kinds = ViolenceKind.order("name ASC")
     @human_conditions = HumanCondition.order("name ASC")
+    @weapons = WeaponKind.order("name ASC")
   end
 
   def demand_perform
-    redirect_to demand_human_record_path(params[:id])
+    #@human_record = HumanRecord.find(params[:id])
+    #@system_case = @human_record.system_case
+    @system_case = SystemCase.find(params[:id])
+
+    if @system_case.update_attributes(params[:system_case])
+      redirect_to actual_status_human_record_path(params[:id])
+    else
+      respond_to do |format|
+        format.html { render action: "demand" }
+        format.json { render json: @system_case.errors, status: :unprocessable_entity }
+      end
+    end    
+  end
+
+  def actual_status
+    @human_record = HumanRecord.find(params[:id])
+    @system_case = @human_record.system_case
   end
 
 end

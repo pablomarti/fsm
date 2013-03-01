@@ -15,6 +15,9 @@ Fosalud::Application.routes.draw do
       put  "heal_injuries"
       get :demand
       put :demand, :action => :demand_perform
+      get :demand
+      put :demand, :action => :demand_perform
+      get :actual_status
     end
   end
 
