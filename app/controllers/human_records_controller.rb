@@ -2,7 +2,7 @@ class HumanRecordsController < ApplicationController
   
   def index
     if can? :read, HumanRecord
-      @human_records = current_user.get_active_cases
+      @human_records = current_user.get_cases
 
       respond_to do |format|
         format.html # index.html.erb
@@ -35,35 +35,72 @@ class HumanRecordsController < ApplicationController
 
   def active_listening_perform
     params[:human_record][:agressions].delete("") if params[:human_record] and params[:human_record][:agressions]
-    params[:human_record][:diagnoses][:emotional_conditions].delete("") if params[:human_record] and params[:human_record][:diagnoses] and params[:human_record][:diagnoses][:emotional_conditions]
-    params[:human_record][:diagnoses][:psycho_physio_alterations].delete("") if params[:human_record] and params[:human_record][:diagnoses] and params[:human_record][:diagnoses][:psycho_physio_alterations]
+    params[:human_record][:diagnosis][:emotional_conditions].delete("") if params[:human_record] and params[:human_record][:diagnoses] and params[:human_record][:diagnoses][:emotional_conditions]
+    params[:human_record][:diagnosis][:psycho_physio_alterations].delete("") if params[:human_record] and params[:human_record][:diagnosis] and params[:human_record][:diagnosis][:psycho_physio_alterations]
+    diagnosis_params =  params[:human_record].delete(:diagnosis)
+    @diagnosis = Diagnosis.new(diagnosis_params) if !diagnosis_params.nil?
     @human_record = HumanRecord.find(params[:id])
     @system_case = @human_record.system_case
-    saved = @human_record.can_heal_injuries?
     ActiveRecord::Base.transaction do
-      saved = saved and @system_case.update_attributes(params[:system_case]) and @human_record.update_attributes(params[:human_record]) 
+      saved = @diagnosis ? @diagnosis.save : false
+      if saved
+        puts "guardo nuevo diagnosis"
+        @human_record.diagnosis = @diagnosis
+        saved = @human_record.save
+        if saved
+          saved = @human_record.can_heal_injuries?
+          if saved 
+            saved = @system_case.update_attributes(params[:system_case]) 
+            if saved
+              saved = @human_record.update_attributes(params[:human_record]) 
+              if !saved
+                @fail_type = "human_record_update"
+              end
+            else
+              @fail_type = "system_case_update"
+            end
+          else
+            @fail_type = "state"
+          end
+        else
+          @fail_type = "human_record_diagnosis"
+        end
+      else
+        puts "no guardo nuevo diagnosis"
+        @fail_type = "diagnosis"
+      end
+
       if saved
         @human_record.heal_injuries
         respond_to do |format|
           format.html { redirect_to human_records_path, notice: 'La victima fue remitida a tratamiento medico existosamente' }
         end
+        return
       else
-        raise ActiveRecord::Rollback if @human_record.can_heal_injuries?
-        respond_to do |format|
-          @aggressions_list = Aggression.grouped_by_kind  
-          format.html { render action: "active_listening" }
-        end
+        raise ActiveRecord::Rollback
       end
     end
+    puts @fail_type
+    if @fail_type !="state"
+      @aggressions_list = Aggression.grouped_by_kind  
+      respond_to do |format|
+        format.html { render action: "active_listening" }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to human_records_path, notice: 'La victima ya fue remitida a tratamiento medico' }
+      end
+    end
+    
   end
 
   def heal_injuries
   	@human_record = HumanRecord.find(params[:id])
-  	if @human_record.can_heal_injuries?
-  		@human_record.victim_stabilized
-  		msg = 'La victima fue remitida a atencion medica para su diagnostico y tratamiento'
+  	if @human_record.can_demand?
+  		@human_record.demand
+  		msg = 'La victima fue remitida con el trabajador social para asistencia legal en su caso'
   	else
-  		msg = 'La victima no se pudo remitir a atencion medica'
+  		msg = 'La victima no se pudo remitir el trabajador social'
   	end
   	respond_to do |format|
   		format.html{ redirect_to human_records_path,  notice: msg}

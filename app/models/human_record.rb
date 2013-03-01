@@ -15,20 +15,21 @@ class HumanRecord < ActiveRecord::Base
   has_many :aggressors #
   has_one  :diagnosis
   
-  attr_accessible :state, :er, :legal_rep_name, :legal_rep_last_name, :aggression_ids
+  attr_accessible :state, :er, :legal_rep_name, :legal_rep_last_name, :aggression_ids, :diagnosis, :emotional_condition_ids, :psycho_physio_alteration_ids
   attr_accessible :educational_level_id, :civil_state_id, :pregnancy_state_id, :ocupation_id, :city_id, :violence_kind_id, :system_case_id, :human_id
   attr_accessible :aggression_case_id
   attr_accessible :name, :last_name, :sex, :age
   attr_accessible :aggressors_attributes, :diagnosis_attributes
 
   accepts_nested_attributes_for :aggressors, allow_destroy: true
-  accepts_nested_attributes_for :diagnosis
 
   attr_accessor :name, :last_name, :sex, :age
 
   #after_find :set_human_properties
   before_create :create_human
   after_create :start_process
+
+  
 
   def set_human_properties
     name = human.name rescue ""
@@ -108,13 +109,12 @@ class HumanRecord < ActiveRecord::Base
   end
 
   ########################################### QUERIES
+  scope :active_cases, where("state <> 'registration'").order("id ASC")
+  scope :active_cases_for_demand, where(:state => "legal_atention").order("id ASC")
+  scope :active_cases_for_heal_injuries, where(:state => "medical_atention").order("id ASC")
+  scope :active_cases_for_active_listening, where(:state => "psicological_atention").order("id ASC")
+  scope :active_cases_for_crisis, where(:state => "psicological_crisis").order("id ASC")
+  scope :registered_cases, where(:state => "registration").order("id ASC")
 
-  def self.active_cases
-    where("state <> 'registration'").order("id ASC")
-  end
-
-  def self.active_cases_for_demand
-    where(:state => "demand").order("id ASC")
-  end
 
 end

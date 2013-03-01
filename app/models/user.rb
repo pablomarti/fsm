@@ -33,20 +33,25 @@ class User < ActiveRecord::Base
   end
 
   def role?(role_sym)
-  	admin? || roles.has_role?(role_sym)
+  	admin? || roles.has_role?(role_sym) || (!level.nil? && level.roles.has_role?(role_sym))
   end
 
   def has_level?(level_name)
     level.name == level_name rescue false
   end
 
-  def get_active_cases
-    cases = []
-
-    if admin? || roles.where(alias: "admin")
-      cases = HumanRecord.active_cases
-    elsif !roles.where(alias: "demand").empty?
-      cases += HumanRecord.active_cases_for_demand
+  def get_cases
+    case level.name
+    when "Administrador"
+      HumanRecord.active_cases
+    when "Recepcionista"
+      HumanRecord.registered_cases
+    when "Psicologo"
+      HumanRecord.active_cases_for_active_listening
+    when "Medico"
+      HumanRecord.active_cases_for_heal_injuries
+    when "Trabajador Social"
+      HumanRecord.active_cases_for_demand
     end
   end
 

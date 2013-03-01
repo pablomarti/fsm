@@ -6,12 +6,12 @@
 	<%=f.input :sexual_assault_antecedent, label: "Antecedente de agressión sexual", as: :radio_buttons, collection: [['Si', true], ['No', false]], checked: false, item_wrapper_class: 'inline' %>
 	<%=f.input :diagnosis_description, label: "Descripcion del diagnostico", as: :text, :input_html => { :cols => 500, :rows => 10 }%>
 	<div class="aggression-type-field">
-		<%=f.input :emotional_conditions, collection: EmotionalCondition.all, :label=>"Condiciones emocionales",:input_html => { :class => "use_as_tag input-large", :multiple => "true" }%>
+		<%=f.input :emotional_condition_ids, collection: EmotionalCondition.all, :label=>"Condiciones emocionales",:input_html => { :class => "use_as_tag input-large", :multiple => "true" }%>
 	</div>
 
 
 	<div class="aggression-type-field">
-		<%=f.input :psycho_physio_alterations, collection: PsychoPhysioAlteration.all, :label=>"Alteracions psicofisiologicas",:input_html => { :class => "use_as_tag input-large", :multiple => "true" }%>
+		<%=f.input :psycho_physio_alteration_ids, collection: PsychoPhysioAlteration.all, :label=>"Alteracions psicofisiologicas",:input_html => { :class => "use_as_tag input-large", :multiple => "true" }%>
 	</div>
 
 </fieldset>
