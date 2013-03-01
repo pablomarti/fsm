@@ -27,7 +27,7 @@
               <%= link_to t('.edit', :default => "Psicologica"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
           <% end %>
 
-          <% if can?(:manage_demand, HumanRecord) && human_record.medical_atention? %>
+          <% if can?(:manage_demand, HumanRecord) && (human_record.medical_atention? || human_record.psicological_crisis?) %>
               <%= link_to t('.edit', :default => "Medica"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
           <% end %>
 
