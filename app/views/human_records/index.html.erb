@@ -23,7 +23,15 @@
         <td><%= human_record.translate_state %></td>
         <td><%= human_record.system_case.created_at.strftime("%d/%m/%Y") %></td>
         <td>
-          <% if can? :manage_demand, HumanRecord %>
+          <% if can?(:manage_demand, HumanRecord) && human_record.psicological_atention? %>
+              <%= link_to t('.edit', :default => "Psicologica"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
+          <% end %>
+
+          <% if can?(:manage_demand, HumanRecord) && human_record.medical_atention? %>
+              <%= link_to t('.edit', :default => "Medica"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
+          <% end %>
+
+          <% if can?(:manage_demand, HumanRecord) && human_record.legal_atention? %>
               <%= link_to t('.edit', :default => "Legal"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
           <% end %>
 

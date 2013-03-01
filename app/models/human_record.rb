@@ -101,16 +101,20 @@ class HumanRecord < ActiveRecord::Base
     event :demand do   
       transition :medical_atention => :legal_atention 
     end   
+
+    event :end_and_follow do
+      transition :legal_atention => :following
+    end
   end
 
   ########################################### QUERIES
 
   def self.active_cases
-    where("state <> 'registration'").order("id ASC")
+    where("state <> 'registration' AND violence_kind_id=1").order("id ASC")
   end
 
   def self.active_cases_for_demand
-    where(:state => "demand").order("id ASC")
+    where(:state => "demand", :violence_kind_id => 1).order("id ASC")
   end
 
 end

@@ -77,6 +77,7 @@ class HumanRecordsController < ApplicationController
   def actual_status
     @human_record = HumanRecord.find(params[:id])
     @system_case = @human_record.system_case
+    @human_records = @system_case.human_records.where("id <> ?", @human_record.id)
   end
 
 end
