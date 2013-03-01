@@ -22,8 +22,13 @@ class HumanRecord < ActiveRecord::Base
 
   attr_accessor :name, :last_name, :sex, :age
 
+  #after_find :set_human_properties
   before_create :create_human
   after_create :start_process
+
+  def set_human_properties
+    name = human.name rescue ""
+  end
 
   def create_human
     h = Human.new(:name => name, :last_name => last_name, :sex => sex, :age => age)
@@ -32,15 +37,30 @@ class HumanRecord < ActiveRecord::Base
   end
 
   def start_process
-    #start_case
-
-    #if er
-    #  make_medical_er
-    #end
+    if er
+      crisis
+    else
+      active_listening
+    end
   end
 
   def self.medical_assistance_list
     where(:state => "medical_assistance").order("er DESC, id ASC")
+  end
+
+  def translate_state
+    return case state
+        when "psicological_crisis"
+                  "Crisis"
+        when "psicological_atention"
+                  "Escucha Activa"
+        when "registration"
+                  "Toma de datos"
+        when "medical_atention"
+                  "Atencion medica"
+        when "legal_atention"
+                  "Atencion legal"
+    end          
   end
 
   #--------Estados----------
@@ -81,6 +101,16 @@ class HumanRecord < ActiveRecord::Base
     event :demand do   
       transition :medical_atention => :legal_atention 
     end   
+  end
+
+  ########################################### QUERIES
+
+  def self.active_cases
+    where("state <> 'registration'").order("id ASC")
+  end
+
+  def self.active_cases_for_demand
+    where(:state => "demand").order("id ASC")
   end
 
 end

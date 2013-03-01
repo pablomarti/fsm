@@ -5,7 +5,7 @@
 	<%= render :partial => 'system_cases/human', :locals => { f: f } %>
 
 	<% if victim == true %>
-		<%= f.input :er, :label => "Emergencia" %>
+		<%= f.input :er, label: "Emergencia", as: :radio_buttons, collection: [['Si', true], ['No', false]], checked: false, item_wrapper_class: 'inline' %>
 	<% end %>
 
 	<%= f.association :educational_level, :label => "Nivel educativo", :include_blank => false %>

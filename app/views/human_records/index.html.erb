@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => "Casos Activos" %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Victima</th>
+      <th>Departamento</th>
+      <th>Municipio</th>
+      <th>Estado</th>
+      <th>Presentacion</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @human_records.each do |human_record| %>
+      <tr>
+        <td><%= human_record.id %></td>
+        <td><%= human_record.human.full_name %></td>
+        <td><%= human_record.city.state.name rescue "" %></td>
+        <td><%= human_record.city.name rescue "" %></td>
+        <td><%= human_record.translate_state %></td>
+        <td><%= human_record.system_case.created_at.strftime("%d/%m/%Y") %></td>
+        <td>
+          <% if can? :manage_demand, HumanRecord %>
+              <%= link_to t('.edit', :default => "Legal"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
+          <% end %>
+
+          <%= link_to t('.edit', :default => "Estado"), actual_status_human_record_path(human_record), :class => 'btn btn-mini' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

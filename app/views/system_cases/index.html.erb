@@ -16,14 +16,16 @@
   <tbody>
     <% @system_cases.each do |system_case| %>
       <tr>
-        <td><%= link_to system_case.id, system_case_path(system_case) %></td>
+        <td><%= system_case.id %></td>
         <td><%= system_case.city.state.name %></td>
         <td><%= system_case.city.name %></td>
         <td><%= system_case.recidivism ? "Si" : "No" %></td>
         <td><%= system_case.complaint ? "Si" : "No" %></td>
         <td><%= system_case.created_at.strftime("%d/%m/%Y") %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          <%= link_to t('.edit', :default => "Detalle"),
+                      system_case_path(system_case), :class => 'btn btn-mini' %>
+          <%= link_to t('.edit', :default => "Editar"),
                       edit_system_case_path(system_case), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       system_case_path(system_case),

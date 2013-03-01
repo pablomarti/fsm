@@ -1,20 +1,57 @@
 <%- model_class = SystemCase -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1><%=t '.title', :default => "Caso ##{@system_case.id}" %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:city_id) %>:</strong></dt>
-  <dd><%= @system_case.city_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:zone_kind_id) %>:</strong></dt>
-  <dd><%= @system_case.zone_kind_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:aggression_date) %>:</strong></dt>
-  <dd><%= @system_case.aggression_date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:recidivism) %>:</strong></dt>
-  <dd><%= @system_case.recidivism %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:complaint) %>:</strong></dt>
-  <dd><%= @system_case.complaint %></dd>
+  <dt><strong>Municipio:</strong></dt>
+  <dd><%= @system_case.city.name %></dd>
+  <dt><strong>Tipo de zona:</strong></dt>
+  <dd><%= @system_case.zone_kind.name %></dd>
+  <dt><strong>Fecha de agresion:</strong></dt>
+  <dd><%= @system_case.aggression_date.strftime("%d/%m/%Y") %></dd>
+  <dt><strong>Reincidencia:</strong></dt>
+  <dd><%= @system_case.recidivism ? "Si" : "No" %></dd>
+  <dt><strong>Denuncia:</strong></dt>
+  <dd><%= @system_case.complaint ? "Si" : "No" %></dd>
 </dl>
+
+<h3>Involucrados</h3>
+
+<% @system_case.human_records.each do |human_record| %>
+  <dl class="dl-horizontal">
+    <dt>
+      <strong>Nombre</strong>
+    </dt>
+    <dd>
+      <%= link_to human_record.human.full_name, actual_status_human_record_path(human_record) %>
+    </dd>
+    <dt>
+      <strong>Edad</strong>
+    </dt>
+    <dd>
+      <%= human_record.human.age %>
+    </dd>
+    <dt>
+      <strong>Sexo</strong>
+    </dt>
+    <dd>
+      <%= human_record.human.sex ? "Femenino" : "Masculino" %>
+    </dd>
+    <dt>
+      <strong>Estado</strong>
+    </dt>
+    <dd>
+      <%= human_record.translate_state %>
+    </dd>
+    <dt>
+      <strong>Rol</strong>
+    </dt>
+    <dd>
+      <%= human_record.violence_kind.name %>
+    </dd>
+  </dl>
+<% end %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

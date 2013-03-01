@@ -31,8 +31,16 @@
 			<li><%= link_to "Tipos de incidentes", incident_kinds_path %></li>
 		</ul>
 	</li>
+<% end %>
 
+<% if can? :read, SystemCase %>
 	<li>
 		<%= link_to "Casos", system_cases_path %>
+	</li>
+<% end %>
+
+<% if can? :read, HumanRecord %>
+	<li>
+		<%= link_to "Expedientes Activos", human_records_path %>
 	</li>
 <% end %>

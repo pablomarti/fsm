@@ -1,6 +1,16 @@
 class HumanRecordsController < ApplicationController
   
   def index
+    if can? :read, HumanRecord
+      @human_records = current_user.get_active_cases
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @human_records }
+      end
+    else
+      redirect_to root_url
+    end
   end
 
   def victim_stabilized
@@ -55,7 +65,7 @@ class HumanRecordsController < ApplicationController
     @system_case = SystemCase.find(params[:id])
 
     if @system_case.update_attributes(params[:system_case])
-      redirect_to demand_status_human_record_path(params[:id])
+      redirect_to actual_status_human_record_path(params[:id])
     else
       respond_to do |format|
         format.html { render action: "demand" }
@@ -64,7 +74,7 @@ class HumanRecordsController < ApplicationController
     end    
   end
 
-  def demand_status
+  def actual_status
     @human_record = HumanRecord.find(params[:id])
     @system_case = @human_record.system_case
   end

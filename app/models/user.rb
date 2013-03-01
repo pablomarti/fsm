@@ -28,15 +28,26 @@ class User < ActiveRecord::Base
   	name + " " + last_name
   end
 
+  def admin?
+    level.name == "Administrador" rescue false
+  end
+
   def role?(role_sym)
-  	r = roles.has_role?(role_sym)
-    puts "MY ROLES: #{roles.inspect}"
-    puts "HAS SYM #{role_sym}? #{r}"
-    return r
+  	admin? || roles.has_role?(role_sym)
   end
 
   def has_level?(level_name)
     level.name == level_name rescue false
+  end
+
+  def get_active_cases
+    cases = []
+
+    if admin? || roles.where(alias: "admin")
+      cases = HumanRecord.active_cases
+    elsif !roles.where(alias: "demand").empty?
+      cases += HumanRecord.active_cases_for_demand
+    end
   end
 
 end
