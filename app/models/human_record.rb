@@ -101,6 +101,10 @@ class HumanRecord < ActiveRecord::Base
     event :demand do   
       transition :medical_atention => :legal_atention 
     end   
+
+    event :end_and_follow do
+      transition :legal_atention => :following
+    end
   end
 
   ########################################### QUERIES
