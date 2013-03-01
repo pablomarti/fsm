@@ -11,6 +11,7 @@
       <th>Estado</th>
       <th>Presentacion</th>
       <th>Asistencia</th>
+      <th>Estado</th>
     </tr>
   </thead>
   <tbody>
@@ -23,17 +24,19 @@
         <td><%= human_record.translate_state %></td>
         <td><%= human_record.system_case.created_at.strftime("%d/%m/%Y") %></td>
         <td>
-          <% if can? :give_legal_advice, HumanRecord %>
+          <% if can?(:give_legal_advice, HumanRecord) && human_record.legal_attention? %>
               <%= link_to t('.edit', :default => "Legal"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
           <%end%>
 
-          <%if can? :do_psico_diagnosis, HumanRecord%>
-            <%= link_to t('.edit', :default => "Detalles de escucha activa"), active_listening_human_record_path(human_record), :class => 'btn btn-mini' %>
+          <%if can?(:do_psico_diagnosis, HumanRecord) && human_record.psicological_attention? %>
+            <%= link_to t('.edit', :default => "Psicologica"), active_listening_human_record_path(human_record), :class => 'btn btn-mini' %>
           <% end %>
 
-          <%if can? :do_med_diagnosis, HumanRecord%>
-            <%= link_to t('.edit', :default => "Atender Medicamente"), heal_injuries_human_record_path(human_record),:method=>:put, :class => 'btn btn-mini' %>
-          <% end %>         
+          <%if can?(:do_med_diagnosis, HumanRecord) && (human_record.psicological_crisis? || human_record.medical_attention?) %>
+            <%= link_to t('.edit', :default => "Medica"), heal_injuries_human_record_path(human_record),:method=>:put, :class => 'btn btn-mini' %>
+          <% end %>     
+        </td>
+        <td>
           <%= link_to t('.edit', :default => "Estado"), actual_status_human_record_path(human_record), :class => 'btn btn-mini' %> 
         </td>
       </tr>

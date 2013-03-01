@@ -1,5 +1,7 @@
 <%= simple_form_for @system_case, :url => demand_human_record_path(@system_case), :html => { :class => 'form-horizontal' } do |f| %>
 	
+	<%= hidden_field_tag :human_record_id, @human_record.id %>
+
 	<h1>Asistencia Legal</h1>
 
 	<hr />

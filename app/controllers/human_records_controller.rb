@@ -123,12 +123,16 @@ class HumanRecordsController < ApplicationController
   end
 
   def demand_perform
-    @human_record = HumanRecord.find(params[:id])
+    #@human_record = HumanRecord.find(params[:id])
     #@system_case = @human_record.system_case
     @system_case = SystemCase.find(params[:id])
 
+    @human_record = HumanRecord.find(params[:human_record_id])
+    @human_record.end_and_follow
+
     if @system_case.update_attributes(params[:system_case])
-      redirect_to actual_status_human_record_path(params[:id])
+      redirect_to actual_status_human_record_path(@human_record.id)
+      #redirect_to human_records_path, :notice => "La asistencia legal ha sido guardada"
     else
       respond_to do |format|
         format.html { render action: "demand" }

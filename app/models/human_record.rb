@@ -57,7 +57,7 @@ class HumanRecord < ActiveRecord::Base
     return case state
         when "psicological_crisis"
                   "Crisis"
-        when "psicological_atention"
+        when "psicological_attention"
                   "Escucha Activa"
         when "registration"
                   "Toma de datos"
@@ -65,6 +65,8 @@ class HumanRecord < ActiveRecord::Base
                   "Atencion medica"
         when "legal_atention"
                   "Atencion legal"
+        when "following"
+                  "Caso en seguimiento"
     end          
   end
 
@@ -113,7 +115,7 @@ class HumanRecord < ActiveRecord::Base
   end
 
   ########################################### QUERIES
-  scope :active_cases, where("state <> 'registration'").order("id ASC")
+  scope :active_cases, where("state <> 'registration' AND violence_kind_id=1").order("id ASC")
   scope :active_cases_for_demand, where(:state => "legal_attention",:violence_kind_id=>1).order("id ASC")
   scope :active_cases_for_heal_injuries, where(:state => "medical_attention",:violence_kind_id=>1).order("id ASC")
   scope :active_cases_for_active_listening, where(:state => "psicological_attention",:violence_kind_id=>1).order("id ASC")
