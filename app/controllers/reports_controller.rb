@@ -6,9 +6,18 @@ class ReportsController < ApplicationController
   	@data = get_report("aggressions_by_state_and_age")
   end
 
-  def load_new_report
-  	@data = get_report(params[:report])
+  def type_reports
+    @data = get_report(params[:kind])
+    @title = params[:title].to_s
   end
+
+  def aggressions_by_state
+    @data = get_report(params[:kind])
+    @title = params[:title].to_s
+  end
+  # def load_new_report
+  # 	@data = get_report(params[:report])
+  # end
 
   def get_report(kind)
   	data = case kind

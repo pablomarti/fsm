@@ -1,10 +1,13 @@
 Fosalud::Application.routes.draw do
 
+  get "reports/index"
+  match "/view_reports" => "reports#index", :as => "view_reports"
 
+  get "reports/type_reports"
+  match "reports/type_reports/:kind/:title" => "reports#type_reports", :as => "type_reports"
 
-  get "graphics/index"
-
-
+  get "reports/aggressions_by_state"
+  match "reports/aggressions_by_state/:kind/:title" => "reports#aggressions_by_state" , :as =>"aggressions_by_state"
   resources :aggression_cases
 
 

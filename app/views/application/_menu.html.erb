@@ -34,16 +34,20 @@
 <% end %>
 
 <% if can? :read, SystemCase %>
+	<%unless controller.controller_name =="main"%>
 	<li>
 		<%= link_to "Casos", system_cases_path %>
 	</li>
+	<%end%>
 <% end %>
 
 <% if can? :read, HumanRecord %>
-	<li>
-		<%= link_to "Expedientes Activos", human_records_path %>
-	</li>
-	<li>
-		<%= link_to "Registro", humen_path %>
-	</li>
+	<%unless controller.controller_name =="main"%>
+		<li>
+			<%= link_to "Expedientes Activos", human_records_path %>
+		</li>
+		<li>
+			<%= link_to "Registro", humen_path %>
+		</li>
+	<%end%>
 <% end %>

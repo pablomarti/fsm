@@ -37,6 +37,12 @@ class SystemCase < ActiveRecord::Base
   end
 
   #Victimas agredidas por edad en cada departamento
+  # def self.aggressions_by_state_and_age
+  #   select("humen.age AS label, states.name AS label2, COUNT(human_records.id) AS total, human_records.violence_kind_id")
+  #   .joins({:human_records => :human}, {:city => :state})
+  #   .group("states.id, humen.age")
+  #   .having(:human_records => {:violence_kind_id => 1})
+  # end
   def self.aggressions_by_state_and_age
     select("humen.age AS label, states.name AS label2, COUNT(human_records.id) AS total, human_records.violence_kind_id")
     .joins({:human_records => :human}, {:city => :state})
