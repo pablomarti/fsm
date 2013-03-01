@@ -53,7 +53,7 @@ class HumanRecordsController < ApplicationController
     #@civil_states = CivilState.order("name ASC")
     #@ocupations = Ocupation.order("name ASC")
     #@cities = City.order("name ASC")
-    #@violence_kinds = ViolenceKind.order("name ASC")
+    @violence_kinds = ViolenceKind.all_except_victim.order("name ASC")
     @human_conditions = HumanCondition.order("name ASC")
     @weapons = WeaponKind.order("name ASC")
   end

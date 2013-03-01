@@ -11,6 +11,7 @@
       <th>Estado</th>
       <th>Presentacion</th>
       <th>Asistencia</th>
+      <th>Estado</th>
     </tr>
   </thead>
   <tbody>
@@ -34,7 +35,8 @@
           <% if can?(:manage_demand, HumanRecord) && human_record.legal_atention? %>
               <%= link_to t('.edit', :default => "Legal"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
           <% end %>
-
+        </td>
+        <td>
           <%= link_to t('.edit', :default => "Estado"), actual_status_human_record_path(human_record), :class => 'btn btn-mini' %>
         </td>
       </tr>

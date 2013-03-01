@@ -55,10 +55,12 @@
         <%= yield %>
       </div>
 
-      <div class="span3">
+      <div class="span1"></div>
+
+      <div class="span2">
         <% if user_signed_in? %>
           	<div class="row">
-          	   <h3>Cola de pacientes</h3>
+          	   <h3>Pendientes</h3>
                <div>
                   <%= render :partial => "list_item", :collection => @list %>
                </div>
@@ -77,7 +79,7 @@
   </div>
   <div class="footer" id="footer">
     <hr class="simple_line">
-    <span class="copyright">Todos los derechos Reservados <%= Time.now.year%></span>
+    <span class="copyright">Fosalud - <%= Time.now.year%></span>
   </div>
 </body>
 </html>
