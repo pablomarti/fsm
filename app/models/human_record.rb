@@ -118,6 +118,7 @@ class HumanRecord < ActiveRecord::Base
   scope :active_cases_for_heal_injuries, where(:state => "medical_attention",:violence_kind_id=>1).order("id ASC")
   scope :active_cases_for_active_listening, where(:state => "psicological_attention",:violence_kind_id=>1).order("id ASC")
   scope :active_cases_for_crisis, where(:state => "psicological_crisis",:violence_kind_id=>1).order("id ASC")
+  scope :active_cases_for_psicologist, where(:state => ["psicological_crisis","psicological_attention"],:violence_kind_id=>1).order("id ASC")
   scope :registered_cases, where(:state => "registration",:violence_kind_id=>1).order("id ASC")
 
 end

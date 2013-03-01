@@ -35,6 +35,10 @@ class Ability
           can :do_med_diagnosis, HumanRecord
         end
 
+        if user.role? :crisis_attention
+          can :stabilize_victim, HumanRecord
+        end        
+
       end
     end
 

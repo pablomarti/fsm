@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
     when "Recepcionista"
       HumanRecord.registered_cases
     when "Psicologo"
-      HumanRecord.active_cases_for_active_listening
+      HumanRecord.active_cases_for_psicologist
     when "Medico"
       HumanRecord.active_cases_for_heal_injuries
     when "Trabajador Social"

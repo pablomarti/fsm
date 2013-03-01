@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   end
 
   def get_list
-  	@list = HumanRecord.medical_assistance_list
+  	@list = current_user.get_cases
+    
   end
 
 end
