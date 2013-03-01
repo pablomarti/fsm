@@ -11,8 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_list
-  	@list = current_user.get_cases
-    
+  	@list = current_user.get_cases if current_user
   end
 
 end
