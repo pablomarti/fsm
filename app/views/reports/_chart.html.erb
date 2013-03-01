@@ -1,0 +1,6 @@
+label - total<br />
+<% @data.each do |item| %>
+	<%#= item.label.to_s + " - " + item.total.to_s %>
+	<%= item.label.to_s + " - " + item.label2.to_s + " - " + item.total.to_s %>
+	<br />
+<% end %>
