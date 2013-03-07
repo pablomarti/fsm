@@ -1,3 +1,6 @@
+#User.destroy_all
+#Level.destroy_all
+
 if Level.all.length == 0
 	puts "Levels"
 	admin = Level.new(:name => "Administrador")
@@ -27,6 +30,9 @@ if Level.all.length == 0
 	nuevo_caso.save
 	editar_caso.save
 	eliminar_caso.save
+	atencion_psicologica.save
+	atencion_medica.save
+	atencion_legal.save
 
 	LevelRole.destroy_all
 
@@ -52,7 +58,10 @@ end
 
 if User.all.length == 0
 	puts "Admin User"
-	User.create!(	:level_id => 1,
+
+	level = Level.where(:name => "Administrador").first
+
+	User.create!(	:level_id => level.id,
 					:name => "Admin", 
 					:last_name => "Admin", 
 					:email => "admin@fosalud.com",

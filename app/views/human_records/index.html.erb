@@ -28,11 +28,11 @@
               <%= link_to t('.edit', :default => "Legal"), demand_human_record_path(human_record), :class => 'btn btn-mini' %>
           <%end%>
 
-          <%if can?(:do_psico_diagnosis, HumanRecord) && human_record.psicological_attention? %>
+          <%if can?(:do_psico_diagnosis, HumanRecord) && (human_record.psicological_attention? || human_record.psicological_crisis?) %>
             <%= link_to t('.edit', :default => "Psicologica"), active_listening_human_record_path(human_record), :class => 'btn btn-mini' %>
           <% end %>
 
-          <%if can?(:do_med_diagnosis, HumanRecord) && (human_record.psicological_crisis? || human_record.medical_attention?) %>
+          <%if can?(:do_med_diagnosis, HumanRecord) && human_record.medical_attention? %>
             <%= link_to t('.edit', :default => "Medica"), heal_injuries_human_record_path(human_record),:method=>:put, :class => 'btn btn-mini' %>
           <% end %>     
         </td>
